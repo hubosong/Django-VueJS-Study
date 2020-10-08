@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<title>Django HU</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+
+		<meta http-equiv="Content-Language" content="pt-br, zh">
+
+		<!-- CSS Materialize  -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" >
+		
+		<!--  Scripts Materialize -->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="{% static 'assets/js/materialize.js' %}"></script>
+
+		<style>
+			.stylehu {
+				margin-left: 10px;
+			}
+			@media screen and (max-width: 736px) {
+				.stylehu {
+					margin-left: 0px;
+				}
+			}
+		</style>
+
+	</head>
+	<body class="subpage" style="background-color: #333;">
+
+		<!-- Header -->
+		<header id="header" class="">
+			<div class="logo">
+				<a href="{% url 'home' %}" lang="zh">胡 <span lang="zh">博嵩</span></a>
+				<a href="{% url 'home' %}" lang="ptbr">HU <span lang="ptbr">bosong</span></a>
+			</div>
+			
+			<button id="switch-lang" style="background-color: rgba(0,0,0,0.0); width: 1em;"><span lang="zh"><img src="{% static 'images/brazil_flag.png' %}"/></span><span lang="ptbr"><img src="{% static 'images/china_flag.png' %}"/></span></button>
+			<a href="#menu" lang="zh">导航 (Dǎoháng)</a>
+			<a href="#menu" lang="ptbr">Menu</a>
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<ul class="links" lang="zh">
+				<li><a href="{% url 'home' %}">首页 (Shǒuyè)</a></li>
+				<li><a href="{% url 'register' %}">注册 (Zhùcè)</a></li>
+				<li><a href="{% url 'manage' %}">管理 (Guǎnlǐ)</a></li>
+				<li><a href="#">设置 (Shèzhì)</a></li>
+			</ul>
+	
+			<ul class="links" lang="ptbr">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'register' %}">Cadastrar Imagens</a></li>
+				<li><a href="{% url 'manage' %}">Gerenciar Imagens</a></li>
+				<li><a href="#">Opções</a></li>
+			</ul>
+		</nav>
+
+		<!-- One -->
+			<section id="One" class="wrapper style3">
+				<div class="inner">
+					<header class="align-center" lang="zh">
+						<h2>管理~你的些照片</h2>
+						<p>(Guǎnlǐ nǐ de xiē zhàopiàn)</p>
+					</header>
+					<header class="align-center" lang="ptbr">
+						<h2>Gerencie suas imagens</h2>
+					</header>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="images" class="wrapper style2">
+				<div class="inner">
+					<div class="box" style="background-color: #111; color: #fff;">
+						<div class="content">
+							<header class="align-center" lang="zh">
+								<h2 style="color: #fff;">管理</h2>
+								<p style="color: #ccc;">(Guǎnlǐ)</p>
+							</header>
+							<header class="align-center" lang="ptbr">
+								<h2 style="color: #fff;">Gerenciar</h2>
+							</header>
+							
+
+                              <!-- Pictures -->                              
+					          <div class="gallery">						
+                                {% for picturess in pictures %}
+						        <div>                            
+                                    <div class="image fit">
+                                        <img src="{{ picturess.image.url }}" alt="" />                                        
+									</div>
+
+									<div class="right" style="margin-top: 20px;">
+										<div class="btn-small" style="background-color: rgba(2, 49, 57, 0.75);">
+											<a href="{% url 'delete' picturess.id %}" style="color: #fff;">
+												<i class="material-icons">delete</i>
+											</a>
+										</div>
+									</div>
+									
+									
+									
+									<form action="{% url 'update' picturess.id %}" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+
+										<div class="file-field input-field" style="width: 70%;">
+										  <div class="btn-small" style="background-color: rgba(2, 49, 57, 0.75);">
+											<i class="material-icons">add</i>
+											<input type="file" name="image">
+										  </div>
+										  <button lang="zh" class="btn waves-effect waves-light stylehu" type="submit" name="action"  style="background-color: rgba(2, 49, 57, 0.75);">提交 (Tíjiāo)<i class="material-icons right">send</i></button>
+										  <button lang="ptbr" class="btn waves-effect waves-light stylehu" type="submit" name="action"  style="background-color: rgba(2, 49, 57, 0.75);">Enviar<i class="material-icons right">send</i></button>
+										  <div class="file-path-wrapper">
+											<input class="file-path" type="text" name="image">											
+										  </div>
+										</div>									
+
+									  </form>
+
+                                </div>
+                                {% endfor %}                        
+					          </div>
+                    
+
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="copyright" lang="zh">
+				&copy; 2020 胡。 版权所有 (Bǎnquán suǒyǒu).
+			</div>
+			<div class="copyright" lang="ptbr">
+				&copy; 2020 HU. todos os direitos reservados.
+			</div>
+		</footer>
+
+	<!-- Scripts -->
+		<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+		<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+		<script src="{% static 'assets/js/skel.min.js' %}"></script>
+		<script src="{% static 'assets/js/util.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems, options);
+              });
+		</script>
+		
+		<script>	
+			$('[lang="zh"]').hide();	
+		$('#switch-lang').click(function() {
+		  $('[lang="zh"]').toggle();
+		  $('[lang="ptbr"]').toggle();
+		});
+		</script>
+
+	</body>
+</html>
