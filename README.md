@@ -1,4 +1,4 @@
-# Django-Study
+# Django-VueJS-Study
 
 <p>
 Projeto criado por Robson Machczew para estudo de Python/Django, sendo utilizado Materialize para complemento da interface. 
