@@ -8,7 +8,7 @@ Também foi usado VueJS, sendo implementado o mesmo projeto Django mas junto ao 
 * hu (projeto django)<br/>
 * huvuejs (projeto django e vuejs)<br/>
 <br/>
-Para detalhes, abrir arquivo INFO que contem os passos usados para instalação e/ou outros.
+Para detalhes, abrir arquivo INFO que contem os passos usados para instalação e outros.
 </p>
 
 
